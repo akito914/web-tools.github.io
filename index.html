@@ -1,0 +1,79 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+    <head>
+        <title>Web-tools</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <h2>Maxima → TeX</h2>
+        <form name="maxima2tex_form">
+            <table>
+                <thead>
+                    <tr>
+                        <td>入力</td>
+                        <td>オプション</td>
+                        <td></td>
+                        <td>変換後</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <textarea size="28" name="text_input1" rows="5" cols="40"></textarea>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="q_ast">'*'削除<br>
+                            <input type="checkbox" name="q_frac">'/'→'frac{}{}'<br>
+                            <input type="checkbox" name="q_lr">\left\right追加<br>
+                        </td>
+                        <td>
+                            <input type=button value="変換" onclick="maxima2tex_conv()">
+                        </td>
+                        <td>
+                            <textarea size="28" name="text_output1" rows="5" cols="40"></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        Debug<br>
+        <textarea size="28" name="debug_area" rows="5" cols="40"></textarea>
+        </form>
+
+
+    </body>
+
+    <script type="text/javascript">
+
+        function maxima2tex_conv()
+        {
+            str = document.maxima2tex_form.text_input1.value;
+
+            if(document.maxima2tex_form.q_ast)
+            {
+                str = str.replace(/\*/g, ' ');
+            }
+            if(document.maxima2tex_form.q_frac)
+            {
+                str = str.replace(/\*/g, ' ');
+            }
+            if(document.maxima2tex_form.q_lr)
+            {
+                str = str.replace(/\(/g, '\\left(');
+                str = str.replace(/\)/g, '\\right)');
+            }
+
+            document.maxima2tex_form.text_output1.value = str;
+            document.maxima2tex_form.debug_area.value = document.maxima2tex_form.q1.checked;
+        }
+
+    </script>
+        
+        
+        
+
+</html>
